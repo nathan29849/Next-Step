@@ -6,7 +6,7 @@ import java.util.Map;
 import next.model.User;
 
 public class DataBase {
-    private static Map<String, User> users = Maps.newHashMap();
+    private static final Map<String, User> users = Maps.newHashMap();
 
     public static void addUser(User user) {
         users.put(user.getUserId(), user);
@@ -18,5 +18,12 @@ public class DataBase {
 
     public static Collection<User> findAll() {
         return users.values();
+    }
+
+    public static boolean login(User user, String userId, String password){
+        if (user == null){
+            return false;
+        }
+        return userId.equals(user.getUserId()) && password.equals(user.getPassword());
     }
 }
