@@ -1,4 +1,4 @@
-package next.web;
+package next.web.login;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
