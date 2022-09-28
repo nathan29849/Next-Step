@@ -69,4 +69,19 @@ public class User {
     public boolean login(String userId, String password) {
         return this.userId.equals(userId) && this.password.equals(password);
     }
+
+    public void update(String password, String name, String email) {
+        if (!password.isEmpty()) {
+            this.password = password;
+        }
+
+        if (!name.isEmpty()) {
+            this.name = name;
+        }
+
+        if (email.isEmpty()) {
+            this.email = email;
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-package next.web;
+package next.web.user;
 
 import core.db.DataBase;
 import java.io.IOException;

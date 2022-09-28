@@ -42,7 +42,7 @@
                         <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
                     </ul>
                 </li>
-                <li><a href="../user/list.html"><i class="glyphicon glyphicon-user"></i></a></li>
+                <li><a href="/user/list"><i class="glyphicon glyphicon-user"></i></a></li>
             </ul>
         </div>
     </div>
@@ -54,43 +54,44 @@
             <ul class="nav dropdown-menu">
                 <li><a href="../user/profile.html"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> Profile</a></li>
                 <li class="nav-divider"></li>
-                <li><a href="/user/list"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> Settings</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> Settings</a></li>
             </ul>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="../index.html">Posts</a></li>
-                <li><a href="/user/login" role="button">로그인</a></li>
+                <li><a href="../user/login.html" role="button">로그인</a></li>
                 <li><a href="../user/form.html" role="button">회원가입</a></li>
                 <li><a href="#" role="button">로그아웃</a></li>
-                <li><a href="#" role="button">개인정보수정</a></li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="container" id="main">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>#</th> <th>사용자 아이디</th> <th>이름</th> <th>이메일</th><th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${users}" var="user" varStatus="status">
-                    <tr>
-                        <th scope="row">${status.count}</th>
-                        <td>${user.userId}</td>
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td><a href="/user/update?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default content-main">
+            <form name="question" method="post" action="/user/update">
+                <div class="form-group">
+                    <label for="userId">사용자 아이디</label>
+                    <p value="${user.userId}"></p>
+                    <input class="form-control" id="userId" name="userId" value="${user.userId}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input class="form-control" id="name" name="name" value="${user.name}">
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" value="${user.email}">
+                </div>
+                <button type="submit" class="btn btn-success clearfix pull-right">수정하기</button>
+                <div class="clearfix" />
+            </form>
         </div>
     </div>
 </div>

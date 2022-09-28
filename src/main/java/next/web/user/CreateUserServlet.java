@@ -1,4 +1,4 @@
-package next.web;
+package next.web.user;
 
 import core.db.DataBase;
 import java.io.IOException;
@@ -25,6 +25,6 @@ public class CreateUserServlet extends HttpServlet {
             req.getParameter("email"));
         log.debug("user : {}", user);
         DataBase.addUser(user);
-        resp.sendRedirect("/user/list");
+        resp.sendRedirect("/");
     }
 }
