@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import next.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,14 @@ public class UpdateUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {
 
-		//TODO AUTHORIZATION 필요
+		HttpSession session = req.getSession();
+		Object value = session.getAttribute("user");
+		if (req.getCookies() == null || value == null){
+			throw new IllegalStateException("로그인되지 않은 유저입니다.");
+		}
 
-		String userId = req.getParameter("userId");
+		User user = (User) value;
+		String userId = user.getUserId();
 		log.debug("[doGET] userId = {}", userId);
 		User savedUser = DataBase.findUserById(userId);
 		req.setAttribute("user", savedUser);
@@ -35,8 +41,17 @@ public class UpdateUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {
-		String userId = req.getParameter("userId");
-		User savedUser = DataBase.findUserById(userId);
+
+		HttpSession session = req.getSession();
+		Object value = session.getAttribute("user");
+		if (req.getCookies() == null || value == null){
+			throw new IllegalStateException("로그인되지 않은 유저입니다.");
+		}
+
+		User user = (User) value;
+//		String userId = req.getParameter("userId");
+//		User savedUser = DataBase.findUserById(userId);
+		User savedUser = DataBase.findUserById(user.getUserId());
 		savedUser.update(
 			req.getParameter("password"),
 			req.getParameter("name"),
