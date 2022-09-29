@@ -60,10 +60,16 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="../index.html">Posts</a></li>
-                <li><a href="/user/login" role="button">로그인</a></li>
-                <li><a href="../user/form.html" role="button">회원가입</a></li>
-                <li><a href="#" role="button">로그아웃</a></li>
-                <li><a href="#" role="button">개인정보수정</a></li>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <li><a href="/user/logout" role="button">로그아웃</a></li>
+                        <li><a href="/user/update?userId=${user.userId}" role="button">개인정보수정</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/user/login" role="button">로그인</a></li>
+                        <li><a href="../user/form.html" role="button">회원가입</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -85,7 +91,12 @@
                         <td>${user.userId}</td>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
-                        <td><a href="/user/update?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
+                        <c:choose>
+                            <c:when test="${sessionScope}">
+                                <td><a href="/user/update?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
+                            </c:when>
+                        <c:choose>
+
                         </td>
                     </tr>
                 </c:forEach>

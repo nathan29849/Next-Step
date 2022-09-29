@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import next.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,8 @@ public class LoginServlet extends HttpServlet {
 
 		log.debug("LOGIN COMPLETE !");
 		resp.addCookie(createCookie("login", "true"));
+		HttpSession session = req.getSession();
+		session.setAttribute("user", user);
 		resp.sendRedirect(HOME);
 	}
 

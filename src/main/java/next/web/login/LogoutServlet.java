@@ -8,6 +8,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,7 @@ public class LogoutServlet extends HttpServlet {
 			.orElseThrow(() -> new IllegalStateException("로그인되지 않은 유저입니다."));
 
 		resp.addCookie(createCookie("login", "false"));
+		req.getSession().invalidate();
 		resp.sendRedirect(HOME);
 	}
 
