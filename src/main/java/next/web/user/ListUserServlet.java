@@ -1,4 +1,4 @@
-package next.web;
+package next.web.user;
 
 import core.db.DataBase;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/list")
 public class ListUserServlet extends HttpServlet {
@@ -16,7 +17,10 @@ public class ListUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getCookies() == null){
+
+        HttpSession session = req.getSession();
+        Object value = session.getAttribute("user");
+        if (req.getCookies() == null || value == null){
             throw new IllegalStateException("로그인되지 않은 유저입니다.");
         }
 
