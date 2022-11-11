@@ -1,4 +1,4 @@
-package next.web.user.controller;
+package next.web.controller;
 
 import core.db.DataBase;
 import java.util.Arrays;
