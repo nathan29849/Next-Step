@@ -1,8 +1,7 @@
-package next.web.user;
+package next.web.user.servlet;
 
 import core.db.DataBase;
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
